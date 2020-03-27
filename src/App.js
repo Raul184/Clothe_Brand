@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.scss'
 //COMPS.
-import Homepage from './components/pages/Homepage.component'
+import Homepage from './components/pages/homepage/Homepage.component'
 
 
 function App() {
