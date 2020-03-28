@@ -1,5 +1,7 @@
 import React from 'react'
 import './collection.styles.scss'
+// Layout
+import CollectionItem from '../collectionItem/CollectionItem.component'
 
 
 const Collection = ({ title , items }) => (
@@ -9,7 +11,7 @@ const Collection = ({ title , items }) => (
       { //Display just 4 items/collection
         items
           .filter( (el , idx) => idx < 4 )
-          .map(el => <div>{el.name}</div>)
+          .map(({ id , ...rest }) => <CollectionItem key={id} {...rest} />)
       }
     </div>
   </div>
