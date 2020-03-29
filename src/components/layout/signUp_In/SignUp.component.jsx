@@ -1,6 +1,5 @@
 import React , { useState } from 'react'
 import './sign.styles.scss'
-import { Link } from 'react-router-dom'
 // Layout
 import FormInput from '../form-input/FormInput.component'
 import CustomButton from '../custom_button/CustomButton.component'
@@ -15,7 +14,10 @@ const SignUp = ({ changeView }) => {
   const { name , email , phone_number , password } = data;
 
   const handleChange = e => {
-
+    setData({
+      ...data ,
+      [e.target.name] : e.target.value
+    })
   }
 
   const handleSubmit = e => {
