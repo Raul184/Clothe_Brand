@@ -11,7 +11,10 @@ const SignUp_SignIn = () => {
   return (
     <div className='SignUp_SignIn'>
       {
-        show ? <SignIn changeView={setShow}/> : <SignUp />
+        show ? 
+        <SignIn changeView={setShow}/> 
+        : 
+        <SignUp changeView={setShow} />
       }
     </div>
   )

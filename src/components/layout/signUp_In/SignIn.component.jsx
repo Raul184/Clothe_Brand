@@ -1,5 +1,5 @@
 import React , { useState } from 'react'
-import './signIn.styles.scss'
+import './sign.styles.scss'
 import FormInput from '../form-input/FormInput.component'
 import CustomButton from '../custom_button/CustomButton.component'
 
