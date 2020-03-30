@@ -42,8 +42,8 @@ export const createUserDocument = async (userAuth , aditionalD ) => {
     catch (error) {
       console.log( 'Error on saving bro , sorry' , error.message )  
     }
-    return userRef;
   }
+  return userRef;
 }
 
 //Init

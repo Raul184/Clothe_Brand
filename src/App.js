@@ -23,10 +23,23 @@ class App extends Component {
   unsubscribeFromAuth = null
 
   componentDidMount(){
-    auth.onAuthStateChanged( 
+    this.unsubscribeFromAuth = auth.onAuthStateChanged( 
       async user => {
+        if(user){
+          // reference obj
+          const userRef = await createUserDocument(user);
+          //document snapShot obj
+          userRef.onSnapshot( snapShot => {
+              this.setState({
+                currentUser: {
+                  id: snapShot.id ,
+                  ...snapShot.data()
+                }
+              })
+          })
+        }
+        // if user logs out
         this.setState({ currentUser: user })
-        createUserDocument(user);
       }
     )
   }
