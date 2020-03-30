@@ -1,3 +1,4 @@
+$google: #4285F4;
 .Custom_button {
   display: inline-block;
   margin: 1em;
@@ -13,5 +14,13 @@
     color: black;
     border: 1px solid black;
     font-size: 16px;
+  }
+}
+// GOOGLE SIGN_IN
+.google {
+  background-color: $google !important;
+  &:hover {
+    background-color: white !important;
+    color: $google !important;
   }
 }

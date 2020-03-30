@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Header from './components/layout/header/Header.component'
 //Pages
 import Homepage from './components/pages/home/HomePage.component'
@@ -7,21 +7,41 @@ import ContactPage from './components/pages/contact/ContactPage.component'
 import SignUp_SignIn from './components/pages/sign/SignUp_SignIn.component'
 //Routing
 import { Route , Switch } from 'react-router-dom'
+// Auth
+import { auth } from './firebase/firebase.utils'
 
 
-
-function App() {
-  return (
-    <div className="App">
-      <Header />
-      <Switch>
-        <Route exact path='/' component={Homepage} />
-        <Route exact path='/sign_in' component={SignUp_SignIn} />
-        <Route exact path='/shop' component={ShopPage} />
-        <Route exact path='/contact' component={ContactPage} />
-      </Switch>
-    </div>
-  );
+class App extends Component {
+  constructor(){
+    super()
+    this.state = {
+      currentUser: null
+    }
+  }
+  // AUTH
+  unsubscribeFromAuth = null
+  componentDidMount(){
+    auth.onAuthStateChanged( user => {
+      this.setState({ currentUser: user })
+    })
+  }
+  //Avoid memory leaks
+  componentWillUnmount(){
+    this.unsubscribeFromAuth();
+  }
+  render() {
+    return (
+      <div className="App">
+        <Header currentUser={this.state.currentUser}/>
+        <Switch>
+          <Route exact path='/' component={Homepage} />
+          <Route exact path='/sign_in' component={SignUp_SignIn} />
+          <Route exact path='/shop' component={ShopPage} />
+          <Route exact path='/contact' component={ContactPage} />
+        </Switch>
+      </div>
+    )
+  }
 }
 
 export default App;
