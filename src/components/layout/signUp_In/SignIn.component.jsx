@@ -2,6 +2,9 @@ import React , { useState } from 'react'
 import './sign.styles.scss'
 import FormInput from '../form-input/FormInput.component'
 import CustomButton from '../custom_button/CustomButton.component'
+// Google Sign In
+import { signInWithGoogle } from '../../../firebase/firebase.utils'
+
 
 const SignIn = ({ changeView }) => {
   const [ data, setData] = useState({
@@ -19,7 +22,13 @@ const SignIn = ({ changeView }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if(email.length <= 0 || password <= 0 ){
+      // Alert to be showed and button to be enabled
+      return ''
+    }
+    //sign in method to be attached
   }
+  
   return (
     <div className='sign_in'>
       <h2>Sign In with email and password please</h2>
@@ -40,7 +49,8 @@ const SignIn = ({ changeView }) => {
           required
           handleChange={handleChange}
         />
-        <CustomButton type="submit">Login</CustomButton>
+        <CustomButton type="submit">Sign In</CustomButton>
+        <CustomButton onClick={signInWithGoogle}>Sign In with Google</CustomButton>
         <small>
           Don't have an account ?
           <span 
