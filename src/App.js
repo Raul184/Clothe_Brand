@@ -8,7 +8,7 @@ import SignUp_SignIn from './components/pages/sign/SignUp_SignIn.component'
 //Routing
 import { Route , Switch } from 'react-router-dom'
 // Auth
-import { auth } from './firebase/firebase.utils'
+import { auth , createUserDocument } from './firebase/firebase.utils'
 
 
 class App extends Component {
@@ -18,12 +18,17 @@ class App extends Component {
       currentUser: null
     }
   }
+
   // AUTH
   unsubscribeFromAuth = null
+
   componentDidMount(){
-    auth.onAuthStateChanged( user => {
-      this.setState({ currentUser: user })
-    })
+    auth.onAuthStateChanged( 
+      async user => {
+        this.setState({ currentUser: user })
+        createUserDocument(user);
+      }
+    )
   }
   //Avoid memory leaks
   componentWillUnmount(){
