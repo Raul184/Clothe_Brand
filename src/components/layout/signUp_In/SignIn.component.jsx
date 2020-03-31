@@ -4,6 +4,7 @@ import FormInput from '../form-input/FormInput.component'
 import CustomButton from '../custom_button/CustomButton.component'
 // Google Sign In
 import { signInWithGoogle } from '../../../firebase/firebase.utils'
+import { auth } from 'firebase'
 
 
 const SignIn = ({ changeView }) => {
@@ -20,13 +21,25 @@ const SignIn = ({ changeView }) => {
     })
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if(email.length <= 0 || password <= 0 ){
       // Alert to be showed and button to be enabled
-      return ''
+      return alert('Please complete all the fields')
     }
-    //sign in method to be attached
+    try {
+      // Sign user in
+      await auth.signInWithEmailAndPassword( email , password )
+
+      // Clear State & ui
+      setData({
+        email: '' ,
+        password: ''
+      })
+    } 
+    catch (error) {
+      console.log( error.message )
+    }
   }
   
   return (
