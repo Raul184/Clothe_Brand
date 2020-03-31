@@ -3,15 +3,25 @@ import './sign.styles.scss'
 // Layout
 import FormInput from '../form-input/FormInput.component'
 import CustomButton from '../custom_button/CustomButton.component'
+// Sign Up 
+import { auth , createUserDocument } from '../../../firebase/firebase.utils'
+
+
 
 const SignUp = ({ changeView }) => {
   const [data, setData] = useState({
-    name: '' ,
+    displayName: '' ,
     email: '' ,
     phone_number: '' ,
-    password: ''
+    password: '' ,
+    confirmPassword: ''
   })
-  const { name , email , phone_number , password } = data;
+  const { 
+    displayName , 
+    email , 
+    phone_number , 
+    password , 
+    confirmPassword} = data;
 
   const handleChange = e => {
     setData({
@@ -20,23 +30,45 @@ const SignUp = ({ changeView }) => {
     })
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
+    if( password !== confirmPassword ){
+      return alert(`PASSWORDS DON'T MATCH`)
+    }
+    try {
+      // Get user saved from res <== FirecaseStore Promise
+      const { user } = await auth.createUserWithEmailAndPassword( email , password)
+
+      // Save it 
+      await createUserDocument( user , { displayName })
+
+      // Clean state/ui
+      setData({
+        displayName: '' ,
+        email: '' ,
+        phone_number: '' ,
+        password: '' ,
+        confirmPassword: ''
+      })
+    } 
+    catch (error) {
+      console.log(error.message)
+    }
   }
   return (
     <div className='sign_up'>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
+      <h2 className='title'>Sign Up</h2>
+      <form className='sign-up-form' onSubmit={handleSubmit}>
         <FormInput 
           type="string" 
-          name='name'
-          value={name} 
+          name='displayName'
+          value={displayName} 
           label='Name'
           required
           handleChange={handleChange}
         />
         <FormInput 
-          type="string" 
+          type="email" 
           name='email'
           value={email}
           label='Email' 
@@ -52,14 +84,22 @@ const SignUp = ({ changeView }) => {
             handleChange={handleChange}
         />
         <FormInput 
-          type="string" 
+          type="password" 
           name='password'
           value={password}
           label='Password' 
           required
           handleChange={handleChange}
         />
-        <CustomButton type="submit">Login</CustomButton>
+        <FormInput 
+          type="password" 
+          name='confirmPassword'
+          value={confirmPassword}
+          label='Confirm Password' 
+          required
+          handleChange={handleChange}
+        />
+        <CustomButton type="submit">Sign Up</CustomButton>
           <small>
             Already have an account ?
             <span 
