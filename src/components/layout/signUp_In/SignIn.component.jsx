@@ -3,8 +3,8 @@ import './sign.styles.scss'
 import FormInput from '../form-input/FormInput.component'
 import CustomButton from '../custom_button/CustomButton.component'
 // Google Sign In
-import { signInWithGoogle } from '../../../firebase/firebase.utils'
-import { auth } from 'firebase'
+import { signInWithGoogle , auth } from '../../../firebase/firebase.utils'
+
 
 
 const SignIn = ({ changeView }) => {

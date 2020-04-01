@@ -1,6 +1,6 @@
-import {
-  SET_CURRENT_USER
-} from './types'
+import userTypes from './types'
+const { SET_CURRENT_USER } = userTypes;
+
 
 const initState = {
   currentUser: null 

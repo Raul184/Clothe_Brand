@@ -36,6 +36,7 @@ class App extends React.Component {
   }
 
   render() {
+    const { currentUser } = this.props;
     return (
       <div>
         <Header />
@@ -44,13 +45,12 @@ class App extends React.Component {
           <Route path='/shop' component={ShopPage} />
           <Route
             exact
-            path='/signin'
-            render={() =>
-              this.props.currentUser ? (
-                <Redirect to='/' />
-              ) : (
-                <SignInAndSignUpPage />
-              )
+            path='/sign'
+            render={
+              () => currentUser ? 
+              <Redirect to='/' />
+              : 
+              <SignInAndSignUpPage />
             }
           />
         </Switch>
@@ -59,9 +59,9 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
-});
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+})
 
 export default connect(
   mapStateToProps,
