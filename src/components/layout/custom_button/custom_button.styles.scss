@@ -24,3 +24,21 @@ $google: #4285F4;
     color: $google !important;
   }
 }
+
+// Shopping Categories list
+.inverted {
+  position: absolute;
+  background-color: white;
+  opacity: .5;
+  color: black;
+  border: 1px solid black;
+  bottom: 3vh;
+
+  &:hover {
+    background-color: #000;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFF;
+    border: none;
+  }
+}

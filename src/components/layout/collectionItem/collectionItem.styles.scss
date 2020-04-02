@@ -1,4 +1,5 @@
 .collection-item {
+  position: relative;
   width: 22%;
   display: flex;
   flex-direction: column;
@@ -23,6 +24,19 @@
     .name {
       width: 90%;
       margin-bottom: 15px;
+    }
+  }
+  .Custom_button {
+    display: none;
+    transition: all ease-in .2s;
+  }
+
+  &:hover {
+    .image {
+      opacity: .8;
+    }
+    .Custom_button {
+      display: flex;
     }
   }
 }

@@ -1,7 +1,7 @@
 import  TOGGLE_CART_HIDDEN  from './types'
 
 const initState = {
-  hidden: true
+  hidden: false
 }
 
 const cartReducer = ( state=initState , action) => {
