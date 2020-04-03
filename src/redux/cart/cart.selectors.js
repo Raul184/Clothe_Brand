@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect'
-import { createElement } from 'react';
 
 //  Input_Selector:  f() => just a piece of state 
 //  Output_Selector: f() that uses createSeelctor and Input selectors
