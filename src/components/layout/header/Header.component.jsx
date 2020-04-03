@@ -6,7 +6,7 @@ import {auth} from '../../../firebase/firebase.utils'
 // redux
 import { connect } from 'react-redux'
 // comps.
-import Cart from '../cart/Cart.component'
+import Cart from '../cartIcon/Cart.component'
 import CartDropDown from '../cartDropdown/CartDropDown.component'
 
 
