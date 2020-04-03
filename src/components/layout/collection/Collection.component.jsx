@@ -11,7 +11,7 @@ const Collection = ({ title , items }) => (
       { //Display just 4 items/collection
         items
           .filter( (el , idx) => idx < 4 )
-          .map(({ id , ...rest }) => <CollectionItem key={id} {...rest} />)
+          .map( el => <CollectionItem key={el.id} item={el} />)
       }
     </div>
   </div>
