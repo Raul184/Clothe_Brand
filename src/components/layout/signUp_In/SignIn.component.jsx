@@ -65,7 +65,7 @@ const SignIn = ({ changeView }) => {
         <CustomButton type="submit">Sign In</CustomButton>
         <CustomButton 
           onClick={signInWithGoogle}
-          isGoogle={1}
+          g={true}
         >
           Sign In with Google
         </CustomButton>
