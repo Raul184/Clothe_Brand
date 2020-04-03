@@ -5,10 +5,12 @@ import { connect } from 'react-redux'
 // Memoization
 import { createStructuredSelector } from 'reselect'
 import { selectTotalItemsCart , selectCartTotalPay } from '../../../redux/cart/cart.selectors'
-
+// Comps.
+import CheckoutItem from '../../layout/checkoutItem/CheckoutItem.component'
 
 
 const Checkout = ({ cartItems , total }) => {
+  console.log('STATE' ,cartItems);
   return (
     <div className="checkout">
       <div className="header">
@@ -19,7 +21,7 @@ const Checkout = ({ cartItems , total }) => {
         <div className="h-blocks"><span>Remove</span></div>
       </div>
       {
-        cartItems.map( el => <span>{el.name}</span> )
+        cartItems.map( el => <CheckoutItem key={el.id} {...el} /> )
       }
       <div className="total">
         <span>Total: {total}$</span>

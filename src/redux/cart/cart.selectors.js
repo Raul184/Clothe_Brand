@@ -33,8 +33,6 @@ export const selectCartHidden = createSelector(
 // TOTAL TO PAY $
 export const selectCartTotalPay = createSelector(
   [ selectTotalItemsCart ] ,
-  cartItems => cartItems.reduce( ( acc , el ) => {
-    acc += el.q * el.price
-  }, 
-  0 )
+  cartItems => cartItems.reduce( 
+    ( acc , el ) => acc += el.q * el.price , 0 )
 )

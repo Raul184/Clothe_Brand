@@ -1,6 +1,7 @@
 import { 
   TOGGLE_CART_HIDDEN , 
-  ADD_ITEM  
+  ADD_ITEM ,
+  REMOVE_ITEM
 } from './types'
 // UTILS
 import {checkItemsQuantity} from './cart.utils'
@@ -22,6 +23,11 @@ const cartReducer = ( state=initState , action) => {
       return {
         ...state ,
         cartItems: checkItemsQuantity( state.cartItems , payload )
+      }
+    case REMOVE_ITEM:
+      return {
+        ...state ,
+        cartItems: state.cartItems.filter( el => el.id !== payload )
       }
     default:
       return state;

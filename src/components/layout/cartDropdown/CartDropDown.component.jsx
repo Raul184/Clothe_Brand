@@ -8,10 +8,11 @@ import CustomButton from '../custom_button/CustomButton.component'
 import { connect } from 'react-redux'
 // Memoization
 import { selectTotalItemsCart } from '../../../redux/cart/cart.selectors'
+// Redux
+import { toggleCartHidden } from '../../../redux/cart/cart.actions'
 
 
-
-const CartDropDown = ({ cartItems , history }) => {
+const CartDropDown = ({ cartItems , history , dispatch }) => {
   return (
     <div className='cart_dropdown'>
       {cartItems.length > 0 ?
@@ -20,7 +21,12 @@ const CartDropDown = ({ cartItems , history }) => {
       ):
       <span className='empty'>Your cart is empty</span>
     }
-      <CustomButton onClick={() => history.push('/checkout')}>Checkout</CustomButton>  
+      <CustomButton onClick={() => {
+        history.push('/checkout')
+        dispatch( toggleCartHidden() )
+      }}>
+        Checkout
+      </CustomButton>  
     </div>
   )
 }
