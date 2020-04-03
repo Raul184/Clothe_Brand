@@ -5,6 +5,10 @@ import CustomButton from '../custom_button/CustomButton.component'
 import CartItem from '../cartItem/CartItem.component'
 // Redux
 import { connect } from 'react-redux'
+// Memoization
+import { selectTotalItemsCart } from '../../../redux/cart/cart.selectors'
+
+
 
 const CartDropDown = ({ cartItems }) => {
   return (
@@ -19,7 +23,7 @@ const CartDropDown = ({ cartItems }) => {
 }
 
 const mapStateToProps = state => ({
-  cartItems: state.cart.cartItems
+  cartItems: selectTotalItemsCart(state)
 })
 export default connect(
   mapStateToProps ,
