@@ -1,5 +1,6 @@
 import React , { useState } from 'react'
 import './sign.styles.scss'
+import { withRouter } from 'react-router-dom'
 // Layout
 import FormInput from '../form-input/FormInput.component'
 import CustomButton from '../custom_button/CustomButton.component'
@@ -8,7 +9,7 @@ import { auth , createUserDocument } from '../../../firebase/firebase.utils'
 
 
 
-const SignUp = ({ changeView }) => {
+const SignUp = ({ changeView , history }) => {
   const [data, setData] = useState({
     displayName: '' ,
     email: '' ,
@@ -41,7 +42,8 @@ const SignUp = ({ changeView }) => {
 
       // Save it 
       await createUserDocument( user , { displayName })
-
+      history.push('/')
+      
       // Clean state/ui
       setData({
         displayName: '' ,
@@ -116,4 +118,4 @@ const SignUp = ({ changeView }) => {
 
 
 
-export default SignUp;
+export default withRouter(SignUp);

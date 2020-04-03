@@ -1,5 +1,7 @@
 import React , { useState } from 'react'
 import './sign.styles.scss'
+import { withRouter } from 'react-router-dom'
+// Comps.
 import FormInput from '../form-input/FormInput.component'
 import CustomButton from '../custom_button/CustomButton.component'
 // Google Sign In
@@ -7,7 +9,7 @@ import { signInWithGoogle , auth } from '../../../firebase/firebase.utils'
 
 
 
-const SignIn = ({ changeView }) => {
+const SignIn = ({ changeView , history }) => {
   const [ data, setData] = useState({
     email: '' ,
     password: ''
@@ -20,7 +22,7 @@ const SignIn = ({ changeView }) => {
       [ e.target.name ] : e.target.value
     })
   }
-
+  // SIGN with EMAIL & PASSWORD
   const handleSubmit = async e => {
     e.preventDefault();
     if(email.length <= 0 || password <= 0 ){
@@ -30,7 +32,6 @@ const SignIn = ({ changeView }) => {
     try {
       // Sign user in
       await auth.signInWithEmailAndPassword( email , password )
-
       // Clear State & ui
       setData({
         email: '' ,
@@ -41,7 +42,7 @@ const SignIn = ({ changeView }) => {
       console.log( error.message )
     }
   }
-  
+
   return (
     <div className='sign_in'>
       <h2>Sign In with email and password please</h2>
@@ -84,4 +85,4 @@ const SignIn = ({ changeView }) => {
 }
 
 
-export default SignIn
+export default withRouter(SignIn)

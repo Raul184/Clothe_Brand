@@ -8,7 +8,9 @@ $google: #4285F4;
   font-size: 16px;
   color: white;
   transition: 300ms ease all;
-
+  height: auto;
+  cursor: pointer;
+  
   &:hover {
     background-color: white;
     color: black;

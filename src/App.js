@@ -7,10 +7,15 @@ import Header from './components/layout/header/Header.component'
 import HomePage from './components/pages/home/HomePage.component';
 import ShopPage from './components/pages/shop/ShopPage.component';
 import SignInAndSignUpPage from './components/pages/sign/SignUp_SignIn.component';
+import CheckoutPage from './components/pages/checkout/Checkout.component';
+// Firebase
 import { auth, createUserDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 // Memoization
 import { selectCurrentUser } from './redux/user/user.selector';
+
+
+
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
@@ -43,7 +48,7 @@ class App extends React.Component {
         <Header />
         <Switch>
           <Route exact path='/' component={HomePage} />
-          <Route path='/shop' component={ShopPage} />
+          <Route exact path='/shop' component={ShopPage} />
           <Route
             exact
             path='/sign'
@@ -54,6 +59,7 @@ class App extends React.Component {
               <SignInAndSignUpPage />
             }
           />
+          <Route exact path='/checkout' component={CheckoutPage} />
         </Switch>
       </div>
     );
