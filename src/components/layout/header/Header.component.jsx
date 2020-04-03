@@ -8,7 +8,10 @@ import { connect } from 'react-redux'
 // comps.
 import Cart from '../cartIcon/Cart.component'
 import CartDropDown from '../cartDropdown/CartDropDown.component'
-
+// Memoization
+import { createStructuredSelector } from 'reselect'
+import { selectCurrentUser } from "../../../redux/user/user.selector";
+import { selectCartHidden } from "../../../redux/cart/cart.selectors";
 
 
 const Header = ({ currentUser , hidden }) => (
@@ -33,9 +36,9 @@ const Header = ({ currentUser , hidden }) => (
 )
 
 
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser ,
-  hidden: state.cart.hidden
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser ,
+  hidden: selectCartHidden
 })
 
 export default connect(

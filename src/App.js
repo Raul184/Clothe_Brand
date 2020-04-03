@@ -9,7 +9,8 @@ import ShopPage from './components/pages/shop/ShopPage.component';
 import SignInAndSignUpPage from './components/pages/sign/SignUp_SignIn.component';
 import { auth, createUserDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
-
+// Memoization
+import { selectCurrentUser } from './redux/user/user.selector';
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
@@ -60,7 +61,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  currentUser: state.user.currentUser
+  currentUser: selectCurrentUser(state)
 })
 
 export default connect(

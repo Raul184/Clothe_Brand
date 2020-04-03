@@ -17,7 +17,7 @@ const CartDropDown = ({ cartItems }) => {
       cartItems.map(el =>
         <CartItem key={el.id} item={el} />
       )}
-      <CustomButton>Checkout</CustomButton>
+      <CustomButton>Checkout</CustomButton>  
     </div>
   )
 }
