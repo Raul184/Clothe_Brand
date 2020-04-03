@@ -1,7 +1,8 @@
 import { 
   TOGGLE_CART_HIDDEN , 
   ADD_ITEM ,
-  REMOVE_ITEM
+  REMOVE_ITEM ,
+  REMOVE_ITEM_AMOUNT
 } from './types'
 
 
@@ -12,6 +13,11 @@ export const toggleCartHidden = () => ({
 export const addItemToCart = item => ({
   type: ADD_ITEM ,
   payload: item
+})
+
+export const removeItemAmount = id => ({
+  type: REMOVE_ITEM_AMOUNT ,
+  payload: id
 })
 
 export const removeItemFromCart = id => {
