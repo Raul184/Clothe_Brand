@@ -9,7 +9,7 @@ import {checkItemsQuantity , removeItemQuantity } from './cart.utils'
 
 const initState = {
   hidden: false , 
-  cartItems: []
+  cartItems: localStorage.getItem('product') || []
 }
 
 const cartReducer = ( state=initState , action) => {
