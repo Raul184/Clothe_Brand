@@ -19,6 +19,7 @@ const DirectoryItems = ({ categories }) => {
           subtitle="SHOP NOW" 
           img={sec.image} 
           size={sec.size}
+          linkUrl={sec.linkUrl}
         />
       )
     }

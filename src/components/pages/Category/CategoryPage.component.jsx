@@ -1,16 +1,22 @@
 import React from 'react'
+import './category.styles.scss'
 // Redux
 import { connect } from 'react-redux'
 // Memoization
 import { selectACollection } from '../../../redux/shop/shop.selectors'
+import CollectionItemComponent from '../../layout/collectionItem/CollectionItem.component'
 
 
 const CategoryPage = ({ category }) => {
-  console.log(category);
-
+  const { title , items } = category
   return (
-    <div className="category">
-      <h2>Category Page</h2>
+    <div className="Category">
+      <h2 className='title'>{title}</h2>
+      <div className="items">
+        {
+          items.map( el => <CollectionItemComponent key={el.id} item={el} />)
+        }
+      </div>
     </div>
   )
 }
