@@ -8,6 +8,7 @@ import HomePage from './components/pages/home/HomePage.component';
 import ShopPage from './components/pages/shop/ShopPage.component';
 import SignInAndSignUpPage from './components/pages/sign/SignUp_SignIn.component';
 import CheckoutPage from './components/pages/checkout/Checkout.component';
+import CategoryPage from './components/pages/Category/CategoryPage.component';
 // Firebase
 import { auth, createUserDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
@@ -49,6 +50,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route exact path='/shop' component={ShopPage} />
+          <Route path='/shop/:categoryId' component={ CategoryPage } />
           <Route
             exact
             path='/sign'
