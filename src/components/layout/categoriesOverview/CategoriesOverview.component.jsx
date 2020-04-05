@@ -4,6 +4,9 @@ import './Categories.styles.scss'
 import { connect } from 'react-redux'
 // Comps.
 import CategoriesItem from '../categoriesItem/CategoriesItem.component'
+// Memoization
+import { selectCollectionItems } from '../../../redux/shop/shop.selectors'
+import { createStructuredSelector } from 'reselect'
 
 const Categories = ({ preview }) => {
   return (
@@ -14,9 +17,8 @@ const Categories = ({ preview }) => {
 }
 
 
-const mapStateToProps = state => ({
-  cart: state.cart.cartItems ,
-  preview: state.preview.collections
+const mapStateToProps = createStructuredSelector({
+  preview: selectCollectionItems
 })
 
 export default connect( 

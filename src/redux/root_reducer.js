@@ -5,7 +5,7 @@ import storage from 'redux-persist/lib/storage'
 import userReducer from './user/user.reducer'
 import cartReducer from './cart/cart.reducer';
 import categoriesReducer from './categories/categories.reducer'
-import shopPreview from './shopPreview/shopPreview.reducer'
+import shopPreview from './shop/shop.reducer'
 
 const persistConfig = {
   key: 'root' ,
