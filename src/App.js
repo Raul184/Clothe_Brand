@@ -14,9 +14,6 @@ import { auth, createUserDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 // Memoization
 import { selectCurrentUser } from './redux/user/user.selector';
-//CC
-// 4242 4242 4242 4242 e0120 cv123
-
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
