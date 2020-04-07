@@ -20,11 +20,9 @@ class App extends React.Component {
 
   componentDidMount() {
     const { setCurrentUser } = this.props;
-
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserDocument(userAuth);
-
         userRef.onSnapshot(snapShot => {
           setCurrentUser({
             id: snapShot.id,
@@ -35,11 +33,10 @@ class App extends React.Component {
       setCurrentUser(userAuth);
     });
   }
-
+  // On Log Out  user ==> has to become null
   componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
-
   render() {
     const { currentUser } = this.props;
     return (
