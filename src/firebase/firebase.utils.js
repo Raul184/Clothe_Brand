@@ -46,10 +46,22 @@ export const createUserDocument = async (userAuth , aditionalD ) => {
   return userRef;
 }
 
+export const addCollectionsAndDocuments = async ( collectionKey , objToBeAdded ) => {
+  const collectionRef = db.collection(collectionKey);
+  // batch-right
+  const batch = db.batch();
+  objToBeAdded.forEach(obj => {
+    // Set id 
+    const nueDocRef = collectionRef.doc()
+    batch.set( nueDocRef , obj )
+  });
+  
+  // success ===> null
+  return await batch.commit()
+}
+
 //Init
 firebase.initializeApp(config);
-// firebase.analytics();
-
 
 // Auth
 export const auth = firebase.auth();

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect'
 // Layout
 import Header from './components/layout/header/Header.component'
 // Pages
@@ -11,15 +11,23 @@ import CheckoutPage from './components/pages/checkout/Checkout.component';
 import CategoryPage from './components/pages/Category/CategoryPage.component';
 // Firebase
 import { auth, createUserDocument } from './firebase/firebase.utils';
+// Redux 
+import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
+// import { selectConvertedCollectionItems } from './redux/shop/shop.selectors'
 // Memoization
 import { selectCurrentUser } from './redux/user/user.selector';
+
+
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { 
+      setCurrentUser , 
+      collectionsArr } = this.props;
+
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserDocument(userAuth);
@@ -31,6 +39,12 @@ class App extends React.Component {
         });
       }
       setCurrentUser(userAuth);
+
+      // Once-Storage-Ready-DB
+      // addCollectionsAndDocuments(
+      //   'collections' , 
+      //   collectionsArr.map(({ title , items }) => ({ title , items }) ) 
+      // )
     });
   }
   // On Log Out  user ==> has to become null
@@ -63,8 +77,9 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  currentUser: selectCurrentUser(state)
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser 
+  // collectionsArr: selectConvertedCollectionItems
 })
 
 export default connect(
