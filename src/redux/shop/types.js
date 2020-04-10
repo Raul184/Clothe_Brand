@@ -1,1 +1,2 @@
 export const UPDATE_COLLECTION = 'UPDATE_COLLECTION'; 
+export const DATA_FETCH = 'DATA_FETCH';

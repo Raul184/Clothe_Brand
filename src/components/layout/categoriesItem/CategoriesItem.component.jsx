@@ -1,12 +1,13 @@
 import React from 'react'
 import './categoriesItem.styles.scss'
+import { Link , withRouter } from 'react-router-dom'
 // Layout
 import CollectionItem from '../collectionItem/CollectionItem.component'
 
 
-const CollectionPreview = ({ title , items }) => (
+const CollectionPreview = ({ title , items , match }) => (
   <div className="collection-preview">
-    <h1>{title.toUpperCase()}</h1>
+    <h1><Link to={`${match.path}/${title.toLowerCase()}`}>{title.toUpperCase()}</Link></h1>
     <div className="preview">
       { //Display just 4 items/collection
         items
@@ -19,4 +20,4 @@ const CollectionPreview = ({ title , items }) => (
 
 
 
-export default CollectionPreview;
+export default withRouter(CollectionPreview);

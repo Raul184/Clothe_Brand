@@ -8,14 +8,14 @@ import CollectionItemComponent from '../../layout/collectionItem/CollectionItem.
 
 
 const CategoryPage = ({ category }) => {
-  const { title , items } = category
   return (
     <div className="Category">
-      <h2 className='title'>{title}</h2>
+      <h2 className='title'>{category.title}</h2>
       <div className="items">
-        {
-          items.map( el => <CollectionItemComponent key={el.id} item={el} />)
-        }
+        { category !== null && category.items.map( 
+            el => 
+              <CollectionItemComponent key={el.id} item={el} />
+        )}
       </div>
     </div>
   )
