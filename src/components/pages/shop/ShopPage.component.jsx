@@ -7,7 +7,9 @@ import CategoriesOverview from '../../layout/categoriesOverview/CategoriesOvervi
 import CategoryPage from '../Category/CategoryPage.component'
 // Firestore
 import { db , arrSnapshopObjConverter } from '../../../firebase/firebase.utils'
-
+// Redux
+import { connect } from 'react-redux'
+import { updateCollects } from '../../../redux/shop/shop.actions'
 
 const ShopPage = ({ match }) => {
   let unsubscribe = null;
@@ -16,10 +18,12 @@ const ShopPage = ({ match }) => {
     const collectionRef = db.collection('collections');
     // On changes
     collectionRef.onSnapshot( async snapShot => {
-      arrSnapshopObjConverter(snapShot)
+      const collectionMap = arrSnapshopObjConverter(snapShot)
+      updateCollects(collectionMap);
     }) 
   }, 
   [])
+
   return (
   <div className='ShopPage'>
     <Route exact path={`${match.path}`} component={ CategoriesOverview } />
@@ -28,4 +32,7 @@ const ShopPage = ({ match }) => {
   )
 }
 
-export default ShopPage;
+export default connect(
+  null ,
+  { updateCollects }
+)(ShopPage);

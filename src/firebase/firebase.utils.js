@@ -74,7 +74,13 @@ export const arrSnapshopObjConverter = snapshotCollection => {
       }
     }
   );
-  console.log(transformedCollection);
+  // Set arrObjs to ObjObjs
+  return transformedCollection.reduce( (acc , curr) => {
+    // key = currObj from arr
+    acc[curr.title.toLowerCase()] = curr 
+    return acc;
+  }, 
+  {})
 }
 // ---------------------------------------
 //Init
