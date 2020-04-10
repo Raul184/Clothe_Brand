@@ -18,10 +18,10 @@ const config = {
 };
 
 // METHODS
-// Store into DB
+
+// Store USERS into DB
 export const createUserDocument = async (userAuth , aditionalD ) => {
   if(!userAuth) return ;
-
   // if there's user
   // Get it ==> by reference (Just-Read Info) or by collection ( CRUD )
   const userRef = db.doc(`users/${userAuth.uid}`)
@@ -46,6 +46,8 @@ export const createUserDocument = async (userAuth , aditionalD ) => {
   return userRef;
 }
 
+// STOCK DATA INTO DB , first time app is created mostly-used
+
 export const addCollectionsAndDocuments = async ( collectionKey , objToBeAdded ) => {
   const collectionRef = db.collection(collectionKey);
   // batch-right
@@ -60,6 +62,21 @@ export const addCollectionsAndDocuments = async ( collectionKey , objToBeAdded )
   return await batch.commit()
 }
 
+export const arrSnapshopObjConverter = snapshotCollection => {
+  const transformedCollection = snapshotCollection.docs.map(
+    doc => {
+      const { title , items } = doc.data();
+      return {
+        routeName: encodeURI(title.toLowerCase()) ,
+        id: doc.id ,
+        title ,
+        items
+      }
+    }
+  );
+  console.log(transformedCollection);
+}
+// ---------------------------------------
 //Init
 firebase.initializeApp(config);
 

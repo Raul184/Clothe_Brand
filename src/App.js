@@ -19,15 +19,18 @@ import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selector';
 
 
-
+ 
 class App extends React.Component {
+  // Such as logout purposes
   unsubscribeFromAuth = null;
 
   componentDidMount() {
     const { 
-      setCurrentUser , 
-      collectionsArr } = this.props;
-
+      setCurrentUser 
+      // collectionsArr 
+    } 
+    = this.props;
+    // Current User
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserDocument(userAuth);
@@ -40,7 +43,7 @@ class App extends React.Component {
       }
       setCurrentUser(userAuth);
 
-      // Once-Storage-Ready-DB
+      // Once-Time-Storage-STOCK
       // addCollectionsAndDocuments(
       //   'collections' , 
       //   collectionsArr.map(({ title , items }) => ({ title , items }) ) 
