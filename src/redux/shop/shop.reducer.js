@@ -20,7 +20,7 @@ const collectionReducer = ( state=initState , action ) => {
     case DATA_FETCH:
       return {
         ...state ,
-        isLoading: !state.isLoading
+        isLoading: false
       }
     default:
       return state;

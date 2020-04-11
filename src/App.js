@@ -33,7 +33,9 @@ class App extends React.Component {
     // Current User
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
+        // Set id for user
         const userRef = await createUserDocument(userAuth);
+        // Subscribe and check for changes & update
         userRef.onSnapshot(snapShot => {
           setCurrentUser({
             id: snapShot.id,
@@ -41,6 +43,7 @@ class App extends React.Component {
           });
         });
       }
+      // if NO user , set Current one to null
       setCurrentUser(userAuth);
 
       // Once-Time-Storage-STOCK

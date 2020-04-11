@@ -31,7 +31,11 @@ const ShopPage = ({ match , updateCollects , spinOnLoading , isLoading }) => {
       const collectionMap = arrSnapshopObjConverter(snapShot)
       updateCollects(collectionMap);
       spinOnLoading()
-    }) 
+    })
+    
+    return () => {
+      unsubscribeFromSnapshot()
+    } 
   }, // eslint-disable-next-line 
   [])
 
