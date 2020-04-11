@@ -1,14 +1,38 @@
-import {
-  UPDATE_COLLECTION ,
-  DATA_FETCH
+// Firestore
+import { db , arrSnapshopObjConverter } from '../../firebase/firebase.utils'
+import { 
+  FETCH_COLLECTIONS_FAILURE , 
+  FETCH_COLLECTIONS_SUCCESS 
 } from './types'
 
-// Update Collections on FrontEnd
-export const updateCollects = collectsMapped => ({
-    type: UPDATE_COLLECTION ,
-    payload: collectsMapped
+// FETCHED DATA  
+const fetchCollectionsSuccess = collectionMapped => ({
+  type: FETCH_COLLECTIONS_SUCCESS , 
+  payload: collectionMapped
 })
 
-export const spinOnLoading = () => ({
-  type: DATA_FETCH 
+// ERROR on Fetch
+const fetchCollectionsFailure = error => ({
+  type: FETCH_COLLECTIONS_FAILURE , 
+  payload: error
 })
+
+// ASYNC INIT FETCH for DATA
+export const fetchCollections = () => {
+  return dispatch => {
+    // Search Ref -> 
+    const collectionRef = db.collection('collections');
+    // Get -> Collection Data needed
+    collectionRef
+    .get()
+    .then( data => {
+      const collectionMapped = arrSnapshopObjConverter( data )
+      dispatch( fetchCollectionsSuccess( collectionMapped ))
+      }
+    )
+    .catch( error => dispatch( fetchCollectionsFailure( error.message )))
+  }
+}
+
+
+

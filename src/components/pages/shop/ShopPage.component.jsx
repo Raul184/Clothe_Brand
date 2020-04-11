@@ -6,39 +6,22 @@ import CategoriesOverview from '../../layout/categoriesOverview/CategoriesOvervi
 import WithSpinner from '../../layout/HOCSpinner/WithSpinner.component'
 // Pages
 import CategoryPage from '../Category/CategoryPage.component'
-// Firestore
-import { db , arrSnapshopObjConverter } from '../../../firebase/firebase.utils'
 // Redux
 import { connect } from 'react-redux'
-import { updateCollects , spinOnLoading } from '../../../redux/shop/shop.actions'
+import { fetchCollections } from '../../../redux/shop/shop.actions'
 // Memoization
 import { createStructuredSelector } from 'reselect'
 import { selectLoading } from '../../../redux/shop/shop.selectors'
 
-// Spinner Attached
+
+// HOC Spinner Attached
 const CategoriesOverviewSpinner = WithSpinner(CategoriesOverview)
 const CategoryPageSpinner = WithSpinner(CategoryPage)
 
 
-const ShopPage = ({ match , updateCollects , spinOnLoading , isLoading }) => {
-  // let unsubscribeFromSnapshot = null;
-  // On changes
-    // unsubscribeFromSnapshot = collectionRef.onSnapshot( async snapShot => {
-    //   const collectionMap = arrSnapshopObjConverter(snapShot)
-    //   updateCollects(collectionMap);
-    //   spinOnLoading()
-    // })
+const ShopPage = ({ match , fetchCollections , isLoading }) => {
   useEffect(() => {
-    // Search Ref -> 
-    const collectionRef = db.collection('collections');
-    // Get -> Collection Data needed
-    collectionRef.get().then(
-      async data => {
-        const collectionMapped = arrSnapshopObjConverter( data )
-        updateCollects(collectionMapped)
-        spinOnLoading()
-      }
-    )
+    fetchCollections()
   }, // eslint-disable-next-line 
   [])
 
@@ -62,5 +45,5 @@ const mapStateToProps = createStructuredSelector({
 
 export default connect(
   mapStateToProps ,
-  { updateCollects , spinOnLoading }
+  { fetchCollections }
 )(ShopPage);
