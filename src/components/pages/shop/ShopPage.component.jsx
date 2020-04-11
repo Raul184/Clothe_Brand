@@ -21,21 +21,24 @@ const CategoryPageSpinner = WithSpinner(CategoryPage)
 
 
 const ShopPage = ({ match , updateCollects , spinOnLoading , isLoading }) => {
-  let unsubscribeFromSnapshot = null;
-  
+  // let unsubscribeFromSnapshot = null;
+  // On changes
+    // unsubscribeFromSnapshot = collectionRef.onSnapshot( async snapShot => {
+    //   const collectionMap = arrSnapshopObjConverter(snapShot)
+    //   updateCollects(collectionMap);
+    //   spinOnLoading()
+    // })
   useEffect(() => {
-    // Search Ref -> Get -> Collection Data needed
+    // Search Ref -> 
     const collectionRef = db.collection('collections');
-    // On changes
-    unsubscribeFromSnapshot = collectionRef.onSnapshot( async snapShot => {
-      const collectionMap = arrSnapshopObjConverter(snapShot)
-      updateCollects(collectionMap);
-      spinOnLoading()
-    })
-    
-    return () => {
-      unsubscribeFromSnapshot()
-    } 
+    // Get -> Collection Data needed
+    collectionRef.get().then(
+      async data => {
+        const collectionMapped = arrSnapshopObjConverter( data )
+        updateCollects(collectionMapped)
+        spinOnLoading()
+      }
+    )
   }, // eslint-disable-next-line 
   [])
 
