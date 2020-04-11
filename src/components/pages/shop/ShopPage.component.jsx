@@ -11,7 +11,7 @@ import { connect } from 'react-redux'
 import { fetchCollections } from '../../../redux/shop/shop.actions'
 // Memoization
 import { createStructuredSelector } from 'reselect'
-import { selectLoading } from '../../../redux/shop/shop.selectors'
+import { selectLoading , selectWhenCollectionsLoaded } from '../../../redux/shop/shop.selectors'
 
 
 // HOC Spinner Attached
@@ -19,28 +19,34 @@ const CategoriesOverviewSpinner = WithSpinner(CategoriesOverview)
 const CategoryPageSpinner = WithSpinner(CategoryPage)
 
 
-const ShopPage = ({ match , fetchCollections , isLoading }) => {
-  useEffect(() => {
-    fetchCollections()
-  }, // eslint-disable-next-line 
-  [])
+const ShopPage = ({ 
+  match , 
+  fetchCollections , 
+  isLoading , 
+  areCollectionsLoaded }) => {
+    console.log(areCollectionsLoaded);
+    useEffect(() => {
+      fetchCollections()
+    }, // eslint-disable-next-line 
+    [])
 
-  return (
-  <div className='ShopPage'>
-    <Route exact path={`${match.path}`} 
-      render={ 
-        (props) => <CategoriesOverviewSpinner  isLoading={isLoading} {...props}/> } 
-    />
-    <Route path={`${match.path}/:categoryId`} 
-      render={ 
-        (props) => <CategoryPageSpinner isLoading={isLoading} {...props}/> } 
-    />
-  </div>
-  )
+    return (
+    <div className='ShopPage'>
+      <Route exact path={`${match.path}`} 
+        render={ 
+          (props) => <CategoriesOverviewSpinner  isLoading={isLoading} {...props}/> } 
+      />
+      <Route path={`${match.path}/:categoryId`} 
+        render={ 
+          (props) => <CategoryPageSpinner isLoading={!areCollectionsLoaded} {...props}/> } 
+      />
+    </div>
+    )
 }
 
 const mapStateToProps = createStructuredSelector({
-  isLoading: selectLoading
+  isLoading: selectLoading ,
+  areCollectionsLoaded: selectWhenCollectionsLoaded
 })
 
 export default connect(

@@ -14,6 +14,17 @@ export const selectLoading = createSelector(
   [ selectCollection ] ,
   el => el.isLoading
 )
+
+
+// Select Once collections=>categories Are Loaded
+export const selectWhenCollectionsLoaded = createSelector(
+  [ selectCollection ] ,
+  // Booleano
+  el => !!el.collections
+  
+)
+
+
 // Convert obt to array
 export const selectConvertedCollectionItems = createSelector(
   [ selectCollectionItems ] ,
