@@ -1,55 +1,27 @@
 import React , { useEffect } from 'react'
 import './shopPage.styles.scss'
 import { Route } from 'react-router-dom'
-// Comps.
-import CategoriesOverview from '../../layout/categoriesOverview/CategoriesOverview.component'
-import WithSpinner from '../../layout/HOCSpinner/WithSpinner.component'
-// Pages
-import CategoryPage from '../Category/CategoryPage.component'
+// Pg.
+import CategoryPageContainer from '../Category/CategoryPageContainer.component'
+import CategoriesOverviewContainer from '../../layout/categoriesOverview/CategoriesOverviewContainer.component'
 // Redux
 import { connect } from 'react-redux'
 import { fetchCollections } from '../../../redux/shop/shop.actions'
-// Memoization
-import { createStructuredSelector } from 'reselect'
-import { selectLoading , selectWhenCollectionsLoaded } from '../../../redux/shop/shop.selectors'
 
-
-// HOC Spinner Attached
-const CategoriesOverviewSpinner = WithSpinner(CategoriesOverview)
-const CategoryPageSpinner = WithSpinner(CategoryPage)
-
-
-const ShopPage = ({ 
-  match , 
-  fetchCollections , 
-  isLoading , 
-  areCollectionsLoaded }) => {
-    console.log(areCollectionsLoaded);
-    useEffect(() => {
-      fetchCollections()
-    }, // eslint-disable-next-line 
-    [])
-
-    return (
-    <div className='ShopPage'>
-      <Route exact path={`${match.path}`} 
-        render={ 
-          (props) => <CategoriesOverviewSpinner  isLoading={isLoading} {...props}/> } 
-      />
-      <Route path={`${match.path}/:categoryId`} 
-        render={ 
-          (props) => <CategoryPageSpinner isLoading={!areCollectionsLoaded} {...props}/> } 
-      />
-    </div>
-    )
+const ShopPage = ({ match , fetchCollections }) => {
+  
+  useEffect(
+    () => fetchCollections(), // eslint-disable-next-line 
+  [])
+  return (
+  <div className='ShopPage'>
+    <Route exact path={`${match.path}`} component={CategoriesOverviewContainer}/>
+    <Route path={`${match.path}/:categoryId`} component={CategoryPageContainer} />
+  </div>
+  )
 }
 
-const mapStateToProps = createStructuredSelector({
-  isLoading: selectLoading ,
-  areCollectionsLoaded: selectWhenCollectionsLoaded
-})
-
 export default connect(
-  mapStateToProps ,
+  null ,
   { fetchCollections }
 )(ShopPage);
