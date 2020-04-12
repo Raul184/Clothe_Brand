@@ -9,7 +9,6 @@ import { selectConvertedCollectionItems } from '../../../redux/shop/shop.selecto
 import { createStructuredSelector } from 'reselect'
 
 const Categories = ({ preview }) => {
-  console.log(preview);
   return (
     <div>
       { preview.map(({ id , ...rest}) => <CategoriesItem key={id} {...rest} /> ) }

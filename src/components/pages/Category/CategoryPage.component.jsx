@@ -12,7 +12,7 @@ const CategoryPage = ({ category }) => {
     <div className="Category">
       <h2 className='title'>{category.title}</h2>
       <div className="items">
-        { category && category.items.map( 
+        { category !== null && category.items.map( 
             el => 
               <CollectionItemComponent key={el.id} item={el} />
         )}

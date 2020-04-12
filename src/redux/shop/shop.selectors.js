@@ -25,7 +25,7 @@ export const selectWhenCollectionsLoaded = createSelector(
 )
 
 
-// Convert obt to array
+// Convert obj to array
 export const selectConvertedCollectionItems = createSelector(
   [ selectCollectionItems ] ,
   items => items ?
