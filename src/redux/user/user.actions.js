@@ -1,10 +1,6 @@
-import userTypes from './types'
-const { SET_CURRENT_USER } = userTypes;
+import { UserActionTypes } from './user.types';
 
-// SET User on Sign UP / Sign IN 
-export const setCurrentUser =  user => {
-  return {
-    type: SET_CURRENT_USER ,
-    payload: user
-  }
-}
+export const setCurrentUser = user => ({
+  type: UserActionTypes.SET_CURRENT_USER,
+  payload: user
+});

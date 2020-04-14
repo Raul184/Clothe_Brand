@@ -1,44 +1,30 @@
-import { createSelector } from 'reselect'
+import { createSelector } from 'reselect';
 
+const selectShop = state => state.shop;
 
-const selectCollection = state => state.preview
+export const selectCollections = createSelector(
+  [selectShop],
+  shop => shop.collections
+);
 
-// Select all Categories > Items available 
-export const selectCollectionItems = createSelector(
-  [ selectCollection ] ,
-  items => items.collections
-)
+export const selectCollectionsForPreview = createSelector(
+  [selectCollections],
+  collections =>
+    collections ? Object.keys(collections).map(key => collections[key]) : []
+);
 
-// Select isLoading
-export const selectLoading = createSelector(
-  [ selectCollection ] ,
-  el => el.isLoading
-)
+export const selectCollection = collectionUrlParam =>
+  createSelector(
+    [selectCollections],
+    collections => (collections ? collections[collectionUrlParam] : null)
+  );
 
+export const selectIsCollectionFetching = createSelector(
+  [selectShop],
+  shop => shop.isFetching
+);
 
-// Select Once collections=>categories Are Loaded
-export const selectWhenCollectionsLoaded = createSelector(
-  [ selectCollection ] ,
-  // Booleano
-  el => !!el.collections
-  
-)
-
-
-// Convert obj to array
-export const selectConvertedCollectionItems = createSelector(
-  [ selectCollectionItems ] ,
-  items => items ?
-    Object.keys(items).map( key => items[key])
-    :
-    []
-)
-
-
-// Set 1 Category > items depending on urlParam
-export const selectACollection = urlParam => createSelector(
-  [ selectCollectionItems ] ,
-  collections => collections ? collections[ urlParam ]
-    :
-    null 
-)
+export const selectIsCollectionsLoaded = createSelector(
+  [selectShop],
+  shop => !!shop.collections
+);

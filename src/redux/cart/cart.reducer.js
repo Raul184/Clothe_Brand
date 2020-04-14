@@ -1,43 +1,38 @@
-import { 
-  TOGGLE_CART_HIDDEN , 
-  ADD_ITEM ,
-  REMOVE_ITEM ,
-  REMOVE_ITEM_AMOUNT
-} from './types'
-// UTILS
-import {checkItemsQuantity , removeItemQuantity } from './cart.utils'
+import CartActionTypes from './cart.types';
+import { addItemToCart, removeItemFromCart } from './cart.utils';
 
-const initState = {
-  hidden: false , 
-  cartItems: localStorage.getItem('product') || []
-}
+const INITIAL_STATE = {
+  hidden: true,
+  cartItems: []
+};
 
-const cartReducer = ( state=initState , action) => {
-  const { type , payload } = action
-  switch (type) {
-    case TOGGLE_CART_HIDDEN:
+const cartReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case CartActionTypes.TOGGLE_CART_HIDDEN:
       return {
-        ...state ,
+        ...state,
         hidden: !state.hidden
-      }
-    case ADD_ITEM:
+      };
+    case CartActionTypes.ADD_ITEM:
       return {
-        ...state ,
-        cartItems: checkItemsQuantity( state.cartItems , payload )
-      }
-    case REMOVE_ITEM:
+        ...state,
+        cartItems: addItemToCart(state.cartItems, action.payload)
+      };
+    case CartActionTypes.REMOVE_ITEM:
       return {
-        ...state ,
-        cartItems: state.cartItems.filter( el => el.id !== payload )
-      }
-    case REMOVE_ITEM_AMOUNT:
+        ...state,
+        cartItems: removeItemFromCart(state.cartItems, action.payload)
+      };
+    case CartActionTypes.CLEAR_ITEM_FROM_CART:
       return {
-        ...state ,
-        cartItems: removeItemQuantity( state.cartItems , payload )
-      }
+        ...state,
+        cartItems: state.cartItems.filter(
+          cartItem => cartItem.id !== action.payload.id
+        )
+      };
     default:
       return state;
   }
-}
+};
 
 export default cartReducer;

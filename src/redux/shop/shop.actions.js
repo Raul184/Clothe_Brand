@@ -1,38 +1,35 @@
-// Firestore
-import { db , arrSnapshopObjConverter } from '../../firebase/firebase.utils'
-import { 
-  FETCH_COLLECTIONS_FAILURE , 
-  FETCH_COLLECTIONS_SUCCESS 
-} from './types'
+import ShopActionTypes from './shop.types';
 
-// FETCHED DATA  
-const fetchCollectionsSuccess = collectionMapped => ({
-  type: FETCH_COLLECTIONS_SUCCESS , 
-  payload: collectionMapped
-})
+import {
+  firestore,
+  convertCollectionsSnapshotToMap
+} from '../../firebase/firebase.utils';
 
-// ERROR on Fetch
-const fetchCollectionsFailure = error => ({
-  type: FETCH_COLLECTIONS_FAILURE , 
-  payload: error
-})
+export const fetchCollectionsStart = () => ({
+  type: ShopActionTypes.FETCH_COLLECTIONS_START
+});
 
-// ASYNC INIT FETCH for DATA
-export const fetchCollections = () => {
+export const fetchCollectionsSuccess = collectionsMap => ({
+  type: ShopActionTypes.FETCH_COLLECTIONS_SUCCESS,
+  payload: collectionsMap
+});
+
+export const fetchCollectionsFailure = errorMessage => ({
+  type: ShopActionTypes.FETCH_COLLECTIONS_FAILURE,
+  payload: errorMessage
+});
+
+export const fetchCollectionsStartAsync = () => {
   return dispatch => {
-    // Search Ref -> 
-    const collectionRef = db.collection('collections');
-    // Get -> Collection Data needed
+    const collectionRef = firestore.collection('collections');
+    dispatch(fetchCollectionsStart());
+
     collectionRef
-    .get()
-    .then( data => {
-      const collectionMapped = arrSnapshopObjConverter( data )
-      dispatch( fetchCollectionsSuccess( collectionMapped ))
-      }
-    )
-    .catch( error => dispatch( fetchCollectionsFailure( error.message )))
-  }
-}
-
-
-
+      .get()
+      .then(snapshot => {
+        const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+        dispatch(fetchCollectionsSuccess(collectionsMap));
+      })
+      .catch(error => dispatch(fetchCollectionsFailure(error.message)));
+  };
+};

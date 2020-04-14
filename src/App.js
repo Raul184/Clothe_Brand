@@ -1,40 +1,32 @@
-import React from 'react'
+import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { createStructuredSelector } from 'reselect'
-// Layout
-import Header from './components/layout/header/Header.component'
-// Pages
-import HomePage from './components/pages/home/HomePage.component';
-import ShopPage from './components/pages/shop/ShopPage.component';
-import SignInAndSignUpPage from './components/pages/sign/SignUp_SignIn.component';
-import CheckoutPage from './components/pages/checkout/Checkout.component';
-import CategoryPage from './components/pages/Category/CategoryPage.component';
-// Firebase
-import { auth, createUserDocument } from './firebase/firebase.utils';
-// Redux 
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+
+import './App.css';
+
+import HomePage from './pages/homepage/homepage.component';
+import ShopPage from './pages/shop/shop.component';
+import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import CheckoutPage from './pages/checkout/checkout.component';
+
+import Header from './components/header/header.component';
+
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+
 import { setCurrentUser } from './redux/user/user.actions';
-// import { selectConvertedCollectionItems } from './redux/shop/shop.selectors'
-// Memoization
-import { selectCurrentUser } from './redux/user/user.selector';
+import { selectCurrentUser } from './redux/user/user.selectors';
 
-
- 
 class App extends React.Component {
-  // Such as logout purposes
   unsubscribeFromAuth = null;
+
   componentDidMount() {
-    const { 
-      setCurrentUser 
-      // collectionsArr 
-    } 
-    = this.props;
-    // Current User
+    const { setCurrentUser } = this.props;
+
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
-        // Set id for user
-        const userRef = await createUserDocument(userAuth);
-        // Subscribe and check for changes & update
+        const userRef = await createUserProfileDocument(userAuth);
+
         userRef.onSnapshot(snapShot => {
           setCurrentUser({
             id: snapShot.id,
@@ -42,40 +34,34 @@ class App extends React.Component {
           });
         });
       }
-      // if NO user , set Current one to null
-      setCurrentUser(userAuth);
 
-      // Once-Time-Storage-STOCK
-      // addCollectionsAndDocuments(
-      //   'collections' , 
-      //   collectionsArr.map(({ title , items }) => ({ title , items }) ) 
-      // )
+      setCurrentUser(userAuth);
     });
   }
-  // On Log Out  user ==> has to become null
+
   componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
+
   render() {
-    const { currentUser } = this.props;
     return (
       <div>
         <Header />
         <Switch>
           <Route exact path='/' component={HomePage} />
-          <Route exact path='/shop' component={ShopPage} />
-          <Route path='/shop/:categoryId' component={CategoryPage}  />
+          <Route path='/shop' component={ShopPage} />
+          <Route exact path='/checkout' component={CheckoutPage} />
           <Route
             exact
-            path='/sign'
-            render={
-              () => currentUser ? 
-              <Redirect to='/' />
-              : 
-              <SignInAndSignUpPage />
+            path='/signin'
+            render={() =>
+              this.props.currentUser ? (
+                <Redirect to='/' />
+              ) : (
+                <SignInAndSignUpPage />
+              )
             }
           />
-          <Route exact path='/checkout' component={CheckoutPage} />
         </Switch>
       </div>
     );
@@ -83,11 +69,14 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser 
-  // collectionsArr: selectConvertedCollectionItems
-})
+  currentUser: selectCurrentUser
+});
+
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+});
 
 export default connect(
   mapStateToProps,
-  { setCurrentUser }
+  mapDispatchToProps
 )(App);

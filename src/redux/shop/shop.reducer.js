@@ -1,33 +1,33 @@
-import {
-  FETCH_COLLECTIONS_SUCCESS,
-  FETCH_COLLECTIONS_FAILURE
-} 
-from './types'
+import ShopActionTypes from './shop.types';
 
-const initState = {
-  collections: null ,
-  isLoading: true , 
+const INITIAL_STATE = {
+  collections: null,
+  isFetching: false,
   errorMessage: undefined
-}
+};
 
-const collectionReducer = ( state=initState , action ) => {
-  const { type , payload  } = action
-  switch (type) {
-    case FETCH_COLLECTIONS_SUCCESS:
+const shopReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case ShopActionTypes.FETCH_COLLECTIONS_START:
       return {
-        ...state ,
-        collections: payload , 
-        isLoading: false
-      }
-    case FETCH_COLLECTIONS_FAILURE:
+        ...state,
+        isFetching: true
+      };
+    case ShopActionTypes.FETCH_COLLECTIONS_SUCCESS:
       return {
-        ...state ,
-        isLoading: false ,
-        errorMessage: payload
-      }
+        ...state,
+        isFetching: false,
+        collections: action.payload
+      };
+    case ShopActionTypes.FETCH_COLLECTIONS_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        errorMessage: action.payload
+      };
     default:
       return state;
   }
-}
+};
 
-export default collectionReducer;
+export default shopReducer;
