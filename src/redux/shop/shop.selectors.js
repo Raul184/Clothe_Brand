@@ -38,8 +38,7 @@ export const selectConvertedCollectionItems = createSelector(
 // Set 1 Category > items depending on urlParam
 export const selectACollection = urlParam => createSelector(
   [ selectCollectionItems ] ,
-  collections => collections ? 
-    collections[ urlParam ]
+  collections => collections ? collections[ urlParam ]
     :
     null 
 )
