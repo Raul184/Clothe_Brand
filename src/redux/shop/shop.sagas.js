@@ -1,15 +1,9 @@
-import { takeEvery , call , put } from 'redux-saga/effects'
-import {
-  FETCH_COLLECTIONS_START ,
-  FETCH_COLLECTIONS_SUCCESS ,
-  FETCH_COLLECTIONS_FAILURE
-} from './shop.types'
-
+import { takeLatest , call , put } from 'redux-saga/effects'
+import { FETCH_COLLECTIONS_START } from './shop.types'
 import { 
   fetchCollectionsSuccess , 
   fetchCollectionsFailure 
 } from './shop.actions'
-
 // FIREBASE
 import {
   firestore,
@@ -37,9 +31,9 @@ export function* fetchCollectionsAsync() {
   }
 }
 
-
+ 
 export function* fetchCollectionsStart() {
-  yield takeEvery( 
+  yield takeLatest( 
     FETCH_COLLECTIONS_START ,
     fetchCollectionsAsync 
   )
