@@ -3,7 +3,9 @@ import { takeLatest , put , all , call } from 'redux-saga/effects';
 import UserActionTypes from './user.types'
 import { 
   signInSuccess , 
-  signInFailure 
+  signInFailure ,
+  signOutFailure,
+  signOutSuccess
 } from './user.actions'
 // Google
 import { 
@@ -16,7 +18,8 @@ import {
 const {
   GOOGLE_SIGN_IN_START ,
   EMAIL_SIGN_IN_START , 
-  CHECK_USER_SESSION
+  CHECK_USER_SESSION ,
+  SIGN_OUT_START
 } = UserActionTypes
 
 //////////////////////////////////
@@ -51,7 +54,6 @@ export function* signInWithGoogle(){
     )
   }
 }
-
 //  Listener for Google Sign-ins/ups
 export function* onGoogleSignInStart(){
   yield takeLatest( GOOGLE_SIGN_IN_START , signInWithGoogle )
@@ -70,7 +72,6 @@ export function* signInWithEmailPass({ payload: { email , password }}){
     yield put( signInFailure( error ));
   }
 }
-
 // Listener for Email_&_Passwords Sign-ins/ups
 export function* onEmailPassSignInStart(){
   yield takeLatest( EMAIL_SIGN_IN_START , signInWithEmailPass )
@@ -97,15 +98,31 @@ export function* isUserAuthenticated(){
     )  
   }
 }
-
 // Listener
 export function* onCheckUserSession(){
  yield takeLatest( CHECK_USER_SESSION , isUserAuthenticated )
 }
 
-
-
-
+////////////////////////////
+  // SIGN OUT USER
+////////////////////////////
+export function* signOutUser(){
+  try {
+    yield auth.signOut()
+    yield put(
+      signOutSuccess()
+    )
+  } 
+  catch (error) {
+    yield put (
+      signOutFailure( error )
+    )  
+  }
+}
+// Listener
+export function* onCheckUserSignedOut(){
+  yield takeLatest( SIGN_OUT_START , signOutUser )
+}
 
 
 
@@ -121,6 +138,7 @@ export function* userSagas(){
   yield all([ 
     call(onGoogleSignInStart) ,
     call(onEmailPassSignInStart) ,
-    call(onCheckUserSession)
+    call(onCheckUserSession) ,
+    call(onCheckUserSignedOut)
   ])
 }  

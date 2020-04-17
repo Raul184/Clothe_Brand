@@ -1,7 +1,9 @@
 import UserActionTypes from './user.types';
 const { 
   SIGN_IN_FAILURE ,
-  SIGN_IN_SUCCESS 
+  SIGN_IN_SUCCESS ,
+  SIGN_OUT_SUCCESS ,
+  SIGN_OUT_FAILURE
 } = UserActionTypes;
 
 
@@ -21,9 +23,16 @@ const userReducer = (state = INITIAL_STATE, action) => {
         error: null
       };
     case SIGN_IN_FAILURE:
+    case SIGN_OUT_FAILURE:
       return {
         ...state ,
         error: payload
+      }
+    case SIGN_OUT_SUCCESS:
+      return {
+        ...state ,
+        currentUser: null ,
+        error: null
       }
     default:
       return state;
