@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 // Memoization
 import { createStructuredSelector } from 'reselect';
-
+import { checkUserSession } from './redux/user/user.actions'
 import './App.css';
 // Pages
 import HomePage from './pages/homepage/homepage.component';
@@ -18,18 +18,8 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-    //   if (userAuth) {
-    //     const userRef = await createUserProfileDocument(userAuth);
-    //     userRef.onSnapshot(snapShot => {
-    //       setCurrentUser({
-    //         id: snapShot.id,
-    //         ...snapShot.data()
-    //       });
-    //     });
-    //   }
-    //   setCurrentUser(userAuth);
-    // });
+    //Check for users on
+    this.props.checkUserSession()
   }
 
   componentWillUnmount() {
@@ -67,5 +57,5 @@ const mapStateToProps = createStructuredSelector({
 
 export default connect(
   mapStateToProps,
-  null
+  { checkUserSession }
 )(App);

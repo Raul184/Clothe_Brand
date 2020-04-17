@@ -9,12 +9,14 @@ import {
 import { 
   auth , 
   googleProvider ,
-  createUserProfileDocument
+  createUserProfileDocument ,
+  getCurrentUser
 } from '../../firebase/firebase.utils';
 
 const {
   GOOGLE_SIGN_IN_START ,
-  EMAIL_SIGN_IN_START
+  EMAIL_SIGN_IN_START , 
+  CHECK_USER_SESSION
 } = UserActionTypes
 
 //////////////////////////////////
@@ -35,7 +37,7 @@ export function* getUserAuth( userAuth ){
 }
 
 ////////////////////////////
-  // GOOGLE SIGN
+  // GOOGLE SIGN IN
 ////////////////////////////
 export function* signInWithGoogle(){
   try {
@@ -56,7 +58,7 @@ export function* onGoogleSignInStart(){
 }
 
 ////////////////////////////
-  // EMAIL & PASS SIGN
+  // EMAIL & PASS SIGN IN
 ////////////////////////////
 
 export function* signInWithEmailPass({ payload: { email , password }}){
@@ -75,6 +77,42 @@ export function* onEmailPassSignInStart(){
 }
 
 
+
+//////////////////////////////
+// CHECK SESSION FOR USER
+/////////////////////////////
+
+export function* isUserAuthenticated(){
+  try {
+    // Get userAuth logged into app ==> auth.onAuthStateChanged...
+    const userAuth = yield getCurrentUser();
+    
+    if(!userAuth) return ;
+    
+    yield getUserAuth( userAuth )
+  } 
+  catch (error) {
+    yield put ( 
+      signInFailure( error )
+    )  
+  }
+}
+
+// Listener
+export function* onCheckUserSession(){
+ yield takeLatest( CHECK_USER_SESSION , isUserAuthenticated )
+}
+
+
+
+
+
+
+
+
+
+
+
 //////////////////////////////
 // For the Sagas-Root
 /////////////////////////////
@@ -82,6 +120,7 @@ export function* onEmailPassSignInStart(){
 export function* userSagas(){
   yield all([ 
     call(onGoogleSignInStart) ,
-    call(onEmailPassSignInStart)
+    call(onEmailPassSignInStart) ,
+    call(onCheckUserSession)
   ])
 }  

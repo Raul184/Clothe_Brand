@@ -16,6 +16,7 @@ const config = {
 
 firebase.initializeApp(config);
 
+// Sign In / Sign Up for USERS
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
@@ -41,6 +42,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+// Automatically load all required data into DB 
 export const addCollectionAndDocuments = async (
   collectionKey,
   objectsToAdd
@@ -56,6 +58,7 @@ export const addCollectionAndDocuments = async (
   return await batch.commit();
 };
 
+// Format Data-ready to work with DB Objs format
 export const convertCollectionsSnapshotToMap = collections => {
   const transformedCollection = collections.docs.map(doc => {
     const { title, items } = doc.data();
@@ -74,6 +77,22 @@ export const convertCollectionsSnapshotToMap = collections => {
   }, {});
 };
 
+// Check for users session ==> Method -> Sagas-Oriented
+export const getCurrentUser = () => {
+  return new Promise(
+    ( resolve , reject ) => {
+      const unsubscribe = auth.onAuthStateChanged( userAuth => {
+        //Get user and cut off listener
+        unsubscribe();
+        // return current user on session
+        resolve( userAuth )
+      }, 
+      reject )
+    }
+  )
+}
+
+// FIREBASE TOOLS
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
