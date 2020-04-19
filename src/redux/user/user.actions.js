@@ -7,7 +7,10 @@ const {
   CHECK_USER_SESSION ,
   SIGN_OUT_START ,
   SIGN_OUT_SUCCESS ,
-  SIGN_OUT_FAILURE
+  SIGN_OUT_FAILURE ,
+  SIGN_UP_START ,
+  SIGN_UP_SUCCESS ,
+  SIGN_UP_FAILURE
 } = UserActionTypes
 
 
@@ -44,7 +47,22 @@ export const signOutSuccess = () => ({
   type: SIGN_OUT_SUCCESS
 })
 
-export const signOutFailure = () => ({
-  type: SIGN_OUT_FAILURE
+export const signOutFailure = error => ({
+  type: SIGN_OUT_FAILURE ,
+  payload: error
 })
 
+export const signUpStart = userData => ({
+  type: SIGN_UP_START ,
+  payload: userData
+})
+
+export const signUpSuccess = ({ user , addData }) => ({
+  type: SIGN_UP_SUCCESS ,
+  payload: { user , addData }
+})
+
+export const signUpFailure = error  => ({
+  type: SIGN_UP_FAILURE ,
+  payload: error
+})

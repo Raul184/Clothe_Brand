@@ -5,7 +5,9 @@ import {
   signInSuccess , 
   signInFailure ,
   signOutFailure,
-  signOutSuccess
+  signOutSuccess ,
+  signUpSuccess ,
+  signUpFailure
 } from './user.actions'
 // Google
 import { 
@@ -19,16 +21,18 @@ const {
   GOOGLE_SIGN_IN_START ,
   EMAIL_SIGN_IN_START , 
   CHECK_USER_SESSION ,
-  SIGN_OUT_START
+  SIGN_OUT_START ,
+  SIGN_UP_START ,
+  // SIGN_UP_SUCCESS
 } = UserActionTypes
 
 //////////////////////////////////
 //  UTILS
 /////////////////////////////////
 
-export function* getUserAuth( userAuth ){
+export function* getUserAuth( userAuth , addData ){
   try {
-    const userRef = yield call( createUserProfileDocument , userAuth )
+    const userRef = yield call( createUserProfileDocument , userAuth , addData )
     const userSnapshot = yield userRef.get();
     yield put( 
       signInSuccess({ id: userSnapshot.id , ...userSnapshot.data() }) 
@@ -109,9 +113,7 @@ export function* onCheckUserSession(){
 export function* signOutUser(){
   try {
     yield auth.signOut()
-    yield put(
-      signOutSuccess()
-    )
+    yield put( signOutSuccess())
   } 
   catch (error) {
     yield put (
@@ -125,8 +127,45 @@ export function* onCheckUserSignedOut(){
 }
 
 
+////////////////////////////
+  // SIGN UP USER
+////////////////////////////
+export function* signUpUser({ payload: { email , password , displayName }}){
+  try {
+    const { user } = yield auth.createUserWithEmailAndPassword(
+      email,
+      password
+    );
+    yield put(
+      signUpSuccess({ user , addData: { displayName } })
+    )
+    yield getUserAuth( user , displayName )
+  } 
+  catch (error) {
+    yield put (
+      signUpFailure( error )
+    )
+  }
+}
+
+// LISTENER
+// Sign UP start
+export function* onUserSignUpStart(){
+  yield takeLatest( SIGN_UP_START , signUpUser )
+}
 
 
+// Sign In User after he signs up
+// export function* signUserInAfterSignUp({ payload: { user , addData }}){
+//   yield getUserAuth( user , addData )
+// }
+
+
+// // LISTENER
+// // Sign Up Succeed
+// export function* onUserSignUpSuccess(){
+//   yield takeLatest( SIGN_UP_SUCCESS , signUserInAfterSignUp )
+// }
 
 
 
@@ -139,6 +178,8 @@ export function* userSagas(){
     call(onGoogleSignInStart) ,
     call(onEmailPassSignInStart) ,
     call(onCheckUserSession) ,
-    call(onCheckUserSignedOut)
+    call(onCheckUserSignedOut) ,
+    call(onUserSignUpStart) 
+    // call(onUserSignUpSuccess )
   ])
 }  
