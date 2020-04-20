@@ -16,18 +16,23 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // App web server hosted in a != origin from users
 app.use(cors());
 
-app.listen(port , error => {
-  if(error) throw error; 
-  console.log('Server running on port: ' + port);  
-});
-
 // On Hk Server
 if(process.env.NODE_ENV === 'production'){
-  // server build.js
+  // serving clientApp
   app.use(express.static(path.join(__dirname , 'client/build')));
 }
-
+// For ALL reqs ==> build.js
 app.get('*' , (req , res ) => res.sendFile(
   path.join(__dirname , 'client/build' , 'index.html')
   )
 )
+
+// Router
+// Stripe Payments
+app.use('/payment' , require('./routes/stripe.js'))
+
+
+app.listen(port , error => {
+  if(error) throw error; 
+  console.log('Server running on port: ' + port);  
+});
