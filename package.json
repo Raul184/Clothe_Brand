@@ -2,7 +2,7 @@
   "name": "cloting-ecommerce",
   "version": "1.0.0",
   "engines": {
-    "node": "v10.15.3" ,
+    "node": "v10.15.3",
     "npm": "6.4.1"
   },
   "main": "server.js",
@@ -27,11 +27,14 @@
   "homepage": "https://github.com/Murciegalo/Clothe_Brand#readme",
   "description": "",
   "dependencies": {
+    "apollo-boost": "^0.4.7",
     "body-parser": "^1.19.0",
     "concurrently": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "graphql": "^15.0.0",
+    "react-apollo": "^3.1.5",
     "stripe": "^8.44.0"
   }
 }
