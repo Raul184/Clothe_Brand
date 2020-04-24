@@ -8,9 +8,9 @@ import { connect } from 'react-redux';
 import { googleSignInStart , emailSignInStart } from '../../redux/user/user.actions';
 // Styled-Comps
 import {
-  SignInContainer,
+  SignInDiv,
   SignInTitle,
-  ButtonsBarContainer
+  ButtonsBarDiv
 } from './sign-in.styles';
 
 const SignIn = ({ googleSignInStart , emailSignInStart }) => {
@@ -31,7 +31,7 @@ const SignIn = ({ googleSignInStart , emailSignInStart }) => {
     });
   
   return (
-    <SignInContainer>
+    <SignInDiv>
       <SignInTitle>I already have an account</SignInTitle>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
@@ -51,7 +51,7 @@ const SignIn = ({ googleSignInStart , emailSignInStart }) => {
           label='password'
           required
         />
-        <ButtonsBarContainer>
+        <ButtonsBarDiv>
           <CustomButton type='submit'> Sign in </CustomButton>
           <CustomButton 
             type='button' 
@@ -60,9 +60,9 @@ const SignIn = ({ googleSignInStart , emailSignInStart }) => {
           >
             Sign in with Google
           </CustomButton>
-        </ButtonsBarContainer>
+        </ButtonsBarDiv>
       </form>
-    </SignInContainer>
+    </SignInDiv>
   )
 }
   

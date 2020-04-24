@@ -6,9 +6,9 @@ import CollectionItem from '../../components/collection-item/collection-item.com
 import { selectCollection } from '../../redux/shop/shop.selectors';
 
 import {
-  CollectionPageContainer,
+  CollectionPageDiv,
   CollectionTitle,
-  CollectionItemsContainer
+  CollectionItemsDiv
 } from './collection.styles';
 import Spinner from '../../components/with-spinner/with-spinner.component';
 
@@ -17,14 +17,14 @@ const CollectionPage = ({ collection , match }) => {
   return collection === null ? 
   <Spinner /> 
   :
-  <CollectionPageContainer>
+  <CollectionPageDiv>
     <CollectionTitle>{collection.title}</CollectionTitle>
-    <CollectionItemsContainer>
+    <CollectionItemsDiv>
       {collection.items.map(item => (
         <CollectionItem key={item.id} item={item} />
       ))}
-    </CollectionItemsContainer>
-  </CollectionPageContainer>
+    </CollectionItemsDiv>
+  </CollectionPageDiv>
   
   
 };

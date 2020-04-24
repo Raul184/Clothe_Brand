@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { ReactComponent as ShoppingIconSVG } from '../../assets/shopping-bag.svg';
 
-export const CartContainer = styled.div`
+export const CartDiv = styled.div`
   width: 45px;
   height: 45px;
   position: relative;
@@ -17,7 +17,7 @@ export const ShoppingIcon = styled(ShoppingIconSVG)`
   height: 24px;
 `;
 
-export const ItemCountContainer = styled.span`
+export const ItemCountDiv = styled.span`
   position: absolute;
   font-size: 10px;
   font-weight: bold;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CheckoutItemContainer = styled.div`
+export const CheckoutItemDiv = styled.div`
   width: 100%;
   display: flex;
   min-height: 100px;
@@ -10,7 +10,7 @@ export const CheckoutItemContainer = styled.div`
   align-items: center;
 `;
 
-export const ImageContainer = styled.div`
+export const ImageDiv = styled.div`
   width: 23%;
   padding-right: 15px;
 
@@ -20,11 +20,11 @@ export const ImageContainer = styled.div`
   }
 `;
 
-export const TextContainer = styled.span`
+export const TextDiv = styled.span`
   width: 23%;
 `;
 
-export const QuantityContainer = styled(TextContainer)`
+export const QuantityDiv = styled(TextDiv)`
   display: flex;
 
   span {
@@ -36,7 +36,7 @@ export const QuantityContainer = styled(TextContainer)`
   }
 `;
 
-export const RemoveButtonContainer = styled.div`
+export const RemoveButtonDiv = styled.div`
   padding-left: 12px;
   cursor: pointer;
 `;

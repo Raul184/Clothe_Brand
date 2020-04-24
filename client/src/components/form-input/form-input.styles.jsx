@@ -9,7 +9,7 @@ const shrinkLabelStyles = css`
   color: ${mainColor};
 `;
 
-export const GroupContainer = styled.div`
+export const GroupDiv = styled.div`
   position: relative;
   margin: 45px 0;
 
@@ -18,7 +18,7 @@ export const GroupContainer = styled.div`
   }
 `;
 
-export const FormInputContainer = styled.input`
+export const FormInputDiv = styled.input`
   background: none;
   background-color: white;
   color: ${subColor};
