@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 // Memoization
 import { createStructuredSelector } from 'reselect';
 import { checkUserSession } from './redux/user/user.actions'
-import './App.css';
 // Pages
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
