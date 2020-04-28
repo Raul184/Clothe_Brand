@@ -1,0 +1,14 @@
+.Error {
+  text-align: center;
+
+  h1 {
+    margin: 0;
+    background: whitesmoke;
+    position: absolute;
+    font-size: 57px;
+    font-weight: bolder;
+    color: white;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
