@@ -12,10 +12,6 @@ import {
 
 
 export function* fetchCollectionsAsync() {
-  // collectionRef.get().then(snapshot=> {
-  //   const collectionsMap = convertCollectionsSnapshotToMap(snapshot)
-  //   dispatch(action(collectionsMap))
-  // })
   try {
     const collectionRef = firestore.collection('collections');
     const snapshot = yield collectionRef.get()
