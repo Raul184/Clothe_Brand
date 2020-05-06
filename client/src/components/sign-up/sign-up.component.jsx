@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { signUpStart } from '../../redux/user/user.actions'
 
 
-const SignUp = ({ signUpStart }) => {
+const SignUp = ({ signUpStart , handle }) => {
   const [ data , setData ] = useState({
     displayName: '',
     email: '',
@@ -40,8 +40,11 @@ const SignUp = ({ signUpStart }) => {
 
   return (
     <SignUpContainer>
-    <SignUpTitle>I do not have a account</SignUpTitle>
-    <span>Sign up with your email and password</span>
+    <SignUpTitle>Sign up</SignUpTitle>
+    <span>
+      Already have an account? 
+      <span onClick={() => handle(false)}> Login</span>
+    </span>
     <form className='sign-up-form' onSubmit={handleSubmit}>
       <FormInput
         type='text'

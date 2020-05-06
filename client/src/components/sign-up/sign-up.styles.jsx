@@ -4,6 +4,15 @@ export const SignUpContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 380px;
+  align-items: center;
+
+  input{
+    width: 240px;
+  }
+
+  button{
+    transform: translateX(25%);
+  }
 `;
 
 export const SignUpTitle = styled.h2`

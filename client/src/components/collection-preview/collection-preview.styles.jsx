@@ -18,6 +18,11 @@ export const TitleDiv = styled.h1`
   &:hover {
     color: grey;
   }
+
+  @media screen and (max-width: 800px){
+    font-size: 20px;
+    margin-bottom: none;
+  }
 `;
 
 export const PreviewDiv = styled.div`

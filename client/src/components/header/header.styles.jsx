@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const HeaderDiv = styled.div`
+  position: relative;
   height: 70px;
   width: 100%;
   display: flex;
@@ -11,17 +12,21 @@ export const HeaderDiv = styled.div`
   @media screen and (max-width: 800px) {
     width: auto;
     height: 50px;
-    padding: 10px;
-    margin-bottom: 20px; 
+    padding: 1px;
+    margin-bottom: 10px; 
   }
 `;
 
 export const LogoDiv = styled(Link)`
-  height: 100%;
   width: 70px;
   padding: 25px;
-  
+  position: absolute;
+  top: 1vh;
   @media screen and (max-width: 800px) {
+    svg{
+      width: 50px;
+    }
+    padding: 5px;
     width: 30px;
     padding: 0; 
   }
@@ -35,7 +40,8 @@ export const OptionsDiv = styled.div`
   justify-content: flex-end;
 
   @media screen and (max-width: 800px) {
-    width: 80%;  
+    width: 85%;
+    margin-left: 2rem;  
   }
 `;
 
@@ -44,6 +50,7 @@ export const OptionLink = styled(Link)`
   cursor: pointer;
 
   @media screen and (max-width: 800px) {
-    padding: 10px; 
+    padding: 5px; 
+    font-size: 15px;
   }
 `;

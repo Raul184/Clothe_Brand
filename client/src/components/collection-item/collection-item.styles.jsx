@@ -22,7 +22,8 @@ export const CollectionItemDiv = styled.div`
 
   @media screen and (max-width: 800px){
     width: 40vw;
-    
+    height: 30vh;
+    position: relative;
     &:hover {
       .image {
         opacity: unset;
@@ -44,9 +45,15 @@ export const AddButton = styled(CustomButton)`
 
   @media screen and (max-width: 800px){
     display: block;
-    opacity: 0.9;
-    min-width: unset;
-    padding: 0px 10px;
+    position: absolute;
+    height: auto;
+    top: 20vh;
+    opacity: 0.6;
+    min-width: 55px;
+    width: 40px;
+    padding: 10px;
+    border: none;
+    line-height: 0px;
   }
 `;
 
@@ -65,14 +72,21 @@ export const CollectionFooterDiv = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 18px;
+
+  @media screen and (max-width: 800px){
+    font-size: 15px;
+  }
 `;
 
 export const NameDiv = styled.span`
   width: 90%;
-  margin-bottom: 15px;
 `;
 
 export const PriceDiv = styled.span`
   width: 10%;
   text-align: right;
+
+  @media screen and (max-width: 800px){
+    width: 20%;
+  }
 `;

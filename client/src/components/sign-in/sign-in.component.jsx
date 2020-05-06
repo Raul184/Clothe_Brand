@@ -32,8 +32,7 @@ const SignIn = ({ googleSignInStart , emailSignInStart }) => {
   
   return (
     <SignInDiv>
-      <SignInTitle>I already have an account</SignInTitle>
-      <span>Sign in with your email and password</span>
+      <SignInTitle>Sign in</SignInTitle>
       <form onSubmit={handleSubmit}>
         <FormInput
           name='email'
@@ -51,7 +50,6 @@ const SignIn = ({ googleSignInStart , emailSignInStart }) => {
           label='password'
           required
         />
-        <ButtonsBarDiv>
           <CustomButton type='submit'> Sign in </CustomButton>
           <CustomButton 
             type='button' 
@@ -60,7 +58,6 @@ const SignIn = ({ googleSignInStart , emailSignInStart }) => {
           >
             Sign in with Google
           </CustomButton>
-        </ButtonsBarDiv>
       </form>
     </SignInDiv>
   )
