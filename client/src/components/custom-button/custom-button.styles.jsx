@@ -51,7 +51,7 @@ export const CustomButtonDiv = styled.button`
   padding: 0 35px 0 35px;
   font-size: 15px;
   text-transform: uppercase;
-  font-family: 'Open Sans Condensed';
+  font-family: 'Roboto';
   font-weight: bolder;
   cursor: pointer;
   display: flex;
