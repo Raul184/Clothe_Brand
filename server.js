@@ -12,7 +12,7 @@ if(process.env.NODE_ENV === 'development') require('dotenv').config()
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use( compression() );
+
 // Req => access as a json file
 app.use( bodyParser.json() );
 // urls strings properly formatted
@@ -23,8 +23,9 @@ app.use( cors() );
 // On Hk Server
 if( process.env.NODE_ENV === 'production'){
   // serving clientApp
-  app.use( express.static(path.join(__dirname , 'client/build')));
+  app.use( compression() );
   app.use( enforce.HTTPS({ trustProtoHeader: true }));
+  app.use( express.static(path.join(__dirname , 'client/build')));
 }
 
 // For ALL reqs ==> build.js
