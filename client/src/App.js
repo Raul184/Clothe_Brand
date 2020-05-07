@@ -11,7 +11,7 @@ import { selectCurrentUser } from './redux/user/user.selectors';
 import ErrorBoundary from './components/error-boundary/ErrorBoundary.component';
 // Spinner
 import Spinner from './components/spinner/Spinner.component'
-// Pages
+// Pages on lazy-loading
 const HomePage = lazy(() => import('./pages/homepage/homepage.component'))
 const ShopPage = lazy(() => import('./pages/shop/shop.component'))
 const SignInSignUpPage = lazy(() => import('./pages/sign-in-and-sign-up/sign-in-and-sign-up.component'))
