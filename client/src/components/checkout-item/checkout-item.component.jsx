@@ -22,7 +22,7 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
       <ImageDiv>
         <img src={imageUrl} alt='item' />
       </ImageDiv>
-      <TextDiv>{name}</TextDiv>
+      {/* <TextDiv>{name}</TextDiv> */}
       <QuantityDiv>
         <div onClick={() => removeItem(cartItem)}>&#10094;</div>
         <span>{quantity}</span>

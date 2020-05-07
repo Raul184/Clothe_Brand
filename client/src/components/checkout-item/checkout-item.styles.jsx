@@ -22,6 +22,11 @@ export const ImageDiv = styled.div`
 
 export const TextDiv = styled.span`
   width: 23%;
+
+  @media screen and (max-width: 800px) {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 export const QuantityDiv = styled(TextDiv)`
@@ -39,4 +44,10 @@ export const QuantityDiv = styled(TextDiv)`
 export const RemoveButtonDiv = styled.div`
   padding-left: 12px;
   cursor: pointer;
+
+  @media screen and (max-width: 800px) {
+    display: flex;
+    justify-content: center;
+    width: 20%;
+  }
 `;
