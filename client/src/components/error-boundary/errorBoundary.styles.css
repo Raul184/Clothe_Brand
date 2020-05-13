@@ -1,6 +1,7 @@
 .Error {
   text-align: center;
 
+}
   h1 {
     margin: 0;
     background: whitesmoke;
@@ -11,4 +12,3 @@
     left: 50%;
     transform: translateX(-50%);
   }
-}

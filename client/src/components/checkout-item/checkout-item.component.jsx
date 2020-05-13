@@ -16,7 +16,7 @@ import {
 } from './checkout-item.styles';
 
 const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
-  const { name, imageUrl, price, quantity } = cartItem;
+  const { imageUrl, price, quantity } = cartItem;
   return (
     <CheckoutItemDiv>
       <ImageDiv>

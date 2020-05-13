@@ -10,7 +10,7 @@ import { googleSignInStart , emailSignInStart } from '../../redux/user/user.acti
 import {
   SignInDiv,
   SignInTitle,
-  ButtonsBarDiv
+  // ButtonsBarDiv
 } from './sign-in.styles';
 
 const SignIn = ({ googleSignInStart , emailSignInStart }) => {

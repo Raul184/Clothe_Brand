@@ -27,16 +27,15 @@
   "homepage": "https://github.com/Murciegalo/Clothe_Brand#readme",
   "description": "",
   "dependencies": {
-    "apollo-boost": "^0.4.7",
+    "apollo-boost": "^0.4.8",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
-    "concurrently": "^5.1.0",
+    "concurrently": "^5.2.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-sslify": "^1.2.0",
     "graphql": "^15.0.0",
-    "react-apollo": "^3.1.5",
-    "stripe": "^8.44.0"
+    "stripe": "^8.51.0"
   }
 }
