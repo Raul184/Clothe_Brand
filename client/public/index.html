@@ -7,17 +7,32 @@
     <meta name="theme-color" content="#000000" />
     <!-- PWA -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link rel="apple-touch-icon" href="./originalS.png">
     <title>CRWN Clothing</title>
   </head>
   <body>
-    <noscript>
+    <style>
+      body {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 20px 40px;
+        font-family:  'Roboto', -apple-system, 'Oxygen','Ubuntu', 'Cantarell', 'Fira Sans',sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        /* 
+        MEDIA QUERIES 
+        */
+        @media screen and (max-width: 800px) {
+          padding: 10px; 
+        }
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    </style>
+    <noscript> 
+      <!-- SPLASH-SCREEN HERE -->
       <h2>PWA on the run , xD</h2>
-      <h3 class="display-4">
-        Hi, it seems like you're using a browser without javascript.
-        <br>You may want to contact me through 
-        <a href="https://pk.linkedin.com/es/raulfront">Linkedin</a> 
-      </h3>
     </noscript>
 
     <div id="root"></div>
