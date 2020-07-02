@@ -32,7 +32,7 @@ const SignIn = ({ googleSignInStart , emailSignInStart }) => {
   
   return (
     <SignInDiv>
-      <SignInTitle>Sign in</SignInTitle>
+      <SignInTitle>Login</SignInTitle>
       <form onSubmit={handleSubmit}>
         <FormInput
           name='email'

@@ -41,10 +41,9 @@ const SignUp = ({ signUpStart , handle }) => {
   return (
     <SignUpContainer>
     <SignUpTitle>Sign up</SignUpTitle>
-    <span>
-      Already have an account? 
-      <span onClick={() => handle(false)}> Login</span>
-    </span>
+    <p>
+      Already have an account? <span onClick={() => handle(false)}>Login</span>
+    </p>
     <form className='sign-up-form' onSubmit={handleSubmit}>
       <FormInput
         type='text'

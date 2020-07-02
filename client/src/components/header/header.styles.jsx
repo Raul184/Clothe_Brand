@@ -32,12 +32,11 @@ export const LogoDiv = styled(Link)`
     padding: 0; 
   }
   @media screen and (max-width: 400px) {
-    // width: 40px;
-    // position: absolute;
-    // top: -15px;
-    // left: 50%;
-    // transform: translateX(-50%);
-    display:none;
+    width: 40px;
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 `;
 
@@ -57,7 +56,7 @@ export const OptionsDiv = styled.div`
     width: 100%;
     margin-right: 0;
     justify-content: space-around;
-    align-items:end
+    align-items:center;
   }
 `;
 
