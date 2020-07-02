@@ -14,15 +14,17 @@
       body {
         box-sizing: border-box;
         margin: 0;
-        padding: 20px 40px;
-        font-family:  'Roboto', -apple-system, 'Oxygen','Ubuntu', 'Cantarell', 'Fira Sans',sans-serif;
+        padding: 20px;
+        font-family:  'Monospace', -apple-system, 'Oxygen','Ubuntu', 'Cantarell', 'Fira Sans',sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         /* 
         MEDIA QUERIES 
         */
         @media screen and (max-width: 800px) {
-          padding: 10px; 
+          body {
+            padding: 20px!important;
+          } 
         }
       }
       a {

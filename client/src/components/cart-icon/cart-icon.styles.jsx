@@ -10,16 +10,25 @@ export const CartDiv = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  @media screen and (max-width: 400px) {
+    right: -8px;
+    top: 0px;
+  }
 `;
 
 export const ShoppingIcon = styled(ShoppingIconSVG)`
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
+  bottom: 7px;
+  position: relative;
+  &:hover {
+    width: 40px;
+    height: 30px;
+  }
 `;
 
 export const ItemCountDiv = styled.span`
   position: absolute;
-  font-size: 10px;
-  font-weight: bold;
-  bottom: 12px;
+  font-size: 17px;
+  bottom: 17px;
 `;
