@@ -52,6 +52,7 @@ export const OptionsDiv = styled.div`
     margin-left: 0rem;  
   }
   @media screen and (max-width: 400px) {
+    height:70px;
     width: 100%;
     margin-right: 0;
     justify-content: space-around;
@@ -62,6 +63,8 @@ export const OptionsDiv = styled.div`
 export const OptionLink = styled(Link)`
   padding: 10px 15px;
   cursor: pointer;
+  text-decoration: none;
+  color: black;
   &:hover {
     border-bottom: 1px solid black;
     font-size: 18px;
