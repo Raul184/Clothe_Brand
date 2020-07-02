@@ -32,11 +32,12 @@ export const LogoDiv = styled(Link)`
     padding: 0; 
   }
   @media screen and (max-width: 400px) {
-    width: 40px;
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
+    // width: 40px;
+    // position: absolute;
+    // top: -15px;
+    // left: 50%;
+    // transform: translateX(-50%);
+    display:none;
   }
 `;
 
