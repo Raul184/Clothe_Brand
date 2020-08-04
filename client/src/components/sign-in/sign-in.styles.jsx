@@ -28,6 +28,7 @@ button{
   flex-direction: column;
   width: 210px;
   align-items: center;
+  margin: 0 auto;
   p{
     font-size:14px;
   }
